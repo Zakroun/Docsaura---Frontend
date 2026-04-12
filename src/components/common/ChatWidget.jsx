@@ -4,60 +4,16 @@ import { FiSend, FiX, FiMessageSquare, FiMinus } from 'react-icons/fi';
 import { RiHeartPulseLine, RiRobot2Line } from 'react-icons/ri';
 import { sanitize, checkRateLimit } from '../../utils';
 
-const SYSTEM_PROMPT = `You are DocsAura AI, an advanced, empathetic, and highly knowledgeable healthcare assistant for DocsAura — a premium Moroccan digital health platform that connects patients with verified doctors, specialists, clinics, and laboratories across Morocco.
+const Apiurl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/ai';
 
-## Your Core Identity
-- Name: DocsAura AI
-- Tone: Warm, professional, reassuring, and human-like
-- Languages: English, French, and Darija/Arabic — detect the user's language automatically and respond in the same language
-- You are NOT a replacement for a doctor — you are a smart health navigator and platform guide
-
-## What You Help With
-
-### 1. Symptom Guidance (NOT Diagnosis)
-- Help users understand what their symptoms might broadly relate to
-- Always frame responses as "this could be worth discussing with a doctor" — never make definitive medical claims
-- Suggest the right type of specialist based on described symptoms
-- Example: chest tightness → cardiologist or general practitioner first
-
-### 2. Specialist Matching
-- Guide users to the right type of doctor based on their concern
-- Know Moroccan medical specialties: médecin généraliste, cardiologue, dermatologue, pédiatre, gynécologue, neurologue, orthopédiste, psychiatre, ophtalmologue, ORL, etc.
-- Suggest booking through DocsAura for verified doctors
-
-### 3. Medical Procedures & Tests
-- Explain common procedures in simple language (blood tests, ECG, IRM, échographie, endoscopie, etc.)
-- Clarify what to expect before/after common tests
-- Mention that DocsAura partners with certified labs
-
-### 4. Platform Navigation
-- Help users find doctors, book appointments, manage their profile
-- Explain how DocsAura works: search → choose doctor → book → consult
-- Mention teleconsultation options where available
-
-### 5. Healthcare in Morocco
-- Inform about CNSS, RAMED, and private insurance coverage
-- Explain how Moroccan healthcare system works (public vs private)
-- Mention typical consultation costs in Morocco when asked
-
-## Response Style Rules
-- Keep responses concise but complete — no unnecessary fluff
-- Use bullet points or numbered steps for clarity when listing things
-- Add a warm closing line encouraging action (booking, calling, etc.)
-- If a user seems distressed or in pain, acknowledge it empathetically first
-- For emergencies: immediately direct to SAMU (15) or nearest urgences
-- Never guess medication dosages or prescribe anything
-- When uncertain, say: "I'd recommend speaking with one of our verified doctors on DocsAura for a proper evaluation."
-
-## Emergency Protocol
-If a user describes: chest pain, difficulty breathing, stroke symptoms, severe bleeding, loss of consciousness, or suicidal thoughts — respond with immediate emergency guidance and the number 15 (SAMU Morocco).
-
-## DocsAura Contact
-- Phone: +212 537 00 11 22
-- Website: www.docsaura.ma`;
+const SYSTEM_PROMPT = `You are DocsAura Assistant, a helpful and empathetic medical information assistant. 
+Your role is to provide general health information, help users find appropriate doctors, and answer common medical questions.
+Always include a disclaimer that you are not a substitute for professional medical advice.
+Keep responses concise, friendly, and under 150 words.
+Never diagnose conditions or prescribe treatments.`;
 
 export default function ChatWidget() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const [minimized, setMinimized] = useState(false);
   const [messages, setMessages] = useState([
@@ -81,7 +37,7 @@ export default function ChatWidget() {
     const clean = sanitize(text.trim());
     if (!clean || clean.length > 500) return;
     if (!checkRateLimit()) {
-      setError('Too many messages. Please wait a moment.');
+      setError(t('chat.rateLimitError'));
       return;
     }
     setError('');
@@ -95,32 +51,32 @@ export default function ChatWidget() {
         .filter(m => m.role !== 'system')
         .map(m => ({ role: m.role, content: m.content }));
 
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      const response = await fetch(`${Apiurl}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
         },
         body: JSON.stringify({
-          model: 'gpt-4o',
-          max_tokens: 600,
-          temperature: 0.65,
-          messages: [
-            { role: 'system', content: SYSTEM_PROMPT },
-            ...history,
-          ],
+          query: clean,
+          lang: i18n.language,
+          history: history.slice(-6)
         }),
       });
 
       if (!response.ok) {
         const errData = await response.json().catch(() => ({}));
-        throw new Error(errData?.error?.message || 'API error');
+        throw new Error(errData?.error || 'API error');
       }
 
       const data = await response.json();
-      const reply =
-        data.choices?.[0]?.message?.content?.trim() ||
-        'Sorry, I could not respond right now.';
+      
+      let reply = t('chat.fallbackError');
+      
+      if (data.success && data.data) {
+        reply = data.data;
+      } else if (data.error) {
+        throw new Error(data.error);
+      }
 
       setMessages(prev => [...prev, { role: 'assistant', content: reply }]);
     } catch (err) {
@@ -128,14 +84,13 @@ export default function ChatWidget() {
         ...prev,
         {
           role: 'assistant',
-          content:
-            "Sorry, I'm having trouble connecting right now. Please try again or call us at +212 537 00 11 22.",
+          content: t('chat.connectionError')
         },
       ]);
     } finally {
       setLoading(false);
     }
-  }, [messages]);
+  }, [messages, t, i18n.language]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -146,7 +101,6 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Floating button */}
       {!open && (
         <button
           onClick={() => setOpen(true)}
@@ -157,14 +111,12 @@ export default function ChatWidget() {
         </button>
       )}
 
-      {/* Chat window */}
       {open && (
         <div
           className={`fixed bottom-6 right-5 z-50 w-[360px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col animate-chat-appear overflow-hidden transition-all duration-200 ${
             minimized ? 'h-16' : 'h-[520px]'
           }`}
         >
-          {/* Header */}
           <div className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-teal-700 to-teal-600 shrink-0">
             <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center shrink-0">
               <RiHeartPulseLine size={17} className="text-white" />
@@ -175,7 +127,7 @@ export default function ChatWidget() {
               </p>
               <div className="flex items-center gap-1.5 mt-0.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <p className="text-teal-100 text-xs">Online</p>
+                <p className="text-teal-100 text-xs">{t('chat.online')}</p>
               </div>
             </div>
             <button
@@ -194,7 +146,6 @@ export default function ChatWidget() {
 
           {!minimized && (
             <>
-              {/* Messages */}
               <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-slate-50/50">
                 {messages.map((msg, i) => (
                   <div
@@ -218,7 +169,6 @@ export default function ChatWidget() {
                   </div>
                 ))}
 
-                {/* Typing indicator */}
                 {loading && (
                   <div className="flex gap-2 justify-start">
                     <div className="w-7 h-7 rounded-full bg-teal-50 border border-teal-100 flex items-center justify-center shrink-0">
@@ -241,7 +191,6 @@ export default function ChatWidget() {
                 <div ref={bottomRef} />
               </div>
 
-              {/* Suggestions (only on first message) */}
               {messages.length === 1 && (
                 <div className="px-4 pb-2 flex flex-col gap-1.5 bg-slate-50/50">
                   {Array.isArray(suggestions) &&
@@ -257,7 +206,6 @@ export default function ChatWidget() {
                 </div>
               )}
 
-              {/* Input */}
               <form
                 onSubmit={handleSubmit}
                 className="flex items-end gap-2 px-3 py-3 border-t border-slate-100 bg-white shrink-0"
