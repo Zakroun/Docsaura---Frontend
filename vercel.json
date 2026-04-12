@@ -1,0 +1,9 @@
+{
+    "buildCommand": "npm install && npm run build",
+    "rewrites": [
+        {
+            "source": "/((?!api|assets|.*\\..*).*)",
+            "destination": "/index.html"
+        }
+    ]
+}
