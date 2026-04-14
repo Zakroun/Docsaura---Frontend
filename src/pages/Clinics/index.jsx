@@ -6,8 +6,6 @@ import SearchBar from '../../components/common/SearchBar';
 import SectionHeader from '../../components/common/SectionHeader';
 import { MdOutlineSearchOff } from "react-icons/md";
 
-const TYPES = ['All', 'Multi-Specialty', 'Surgery & Orthopedics', 'Pediatrics & Maternity'];
-
 export default function Clinics() {
   const { t } = useTranslation();
   const [query, setQuery] = useState('');
@@ -23,11 +21,11 @@ export default function Clinics() {
     <div className="min-h-screen bg-slate-50">
       <div className="bg-white border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-          <SectionHeader eyebrow="Medical Centers" title={t('nav.clinics')} subtitle="Find top clinics and medical centers across Morocco." />
+          <SectionHeader eyebrow={t('clinics.eyebrow')} title={t('clinics.title')} subtitle={t('clinics.subtitle')} />
           <SearchBar
             value={query} onChange={e => setQuery(e.target.value)}
-            placeholder="Search clinics by name or location..."
-            filters={TYPES} activeFilter={activeFilter} onFilter={setActiveFilter}
+            placeholder={t('clinics.input_placeholder')}
+            filters={t('clinics.types', { returnObjects: true })} activeFilter={activeFilter} onFilter={setActiveFilter}
           />
         </div>
       </div>
@@ -37,8 +35,8 @@ export default function Clinics() {
             <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-5">
               <MdOutlineSearchOff size={28} className="text-slate-500" />
             </div>
-            <h3 className="text-xl font-semibold text-slate-900 mb-2">No clinics found</h3>
-            <p className="text-slate-500 text-sm">Try adjusting your search or filters</p>
+            <h3 className="text-xl font-semibold text-slate-900 mb-2">{t('clinics.notfound_title')}</h3>
+            <p className="text-slate-500 text-sm">{t('clinics.notfound_desc')}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

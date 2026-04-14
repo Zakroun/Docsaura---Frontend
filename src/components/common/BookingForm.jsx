@@ -67,19 +67,19 @@ export default function BookingForm({ consultationTypes = [], availableSlots = [
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
           label={t('booking.name')} name="name" value={form.name}
-          onChange={handleChange} error={errors.name} placeholder="Aicha Bennani"
+          onChange={handleChange} error={errors.name} placeholder={t('booking.name_placeholder')}
           required icon={FiUser}
         />
         <Input
           label={t('booking.email')} name="email" type="email" value={form.email}
-          onChange={handleChange} error={errors.email} placeholder="aicha@example.com"
+          onChange={handleChange} error={errors.email} placeholder={t('booking.email_placeholder')}
           required icon={FiMail}
         />
       </div>
 
       <Input
         label={t('booking.phone')} name="phone" value={form.phone}
-        onChange={handleChange} error={errors.phone} placeholder="+212 6XX XXX XXX"
+        onChange={handleChange} error={errors.phone} placeholder={t('booking.phone_placeholder')}
         required icon={FiPhone}
       />
 
@@ -93,7 +93,7 @@ export default function BookingForm({ consultationTypes = [], availableSlots = [
           label={t('booking.time')} name="time" value={form.time}
           onChange={handleChange} error={errors.time} required
         >
-          <option value="">Select time</option>
+          <option value="">{t('Select.select_time')}</option>
           {availableSlots.map(slot => (
             <option key={slot} value={slot}>{slot}</option>
           ))}
@@ -105,9 +105,9 @@ export default function BookingForm({ consultationTypes = [], availableSlots = [
           label={t('booking.type')} name="type" value={form.type}
           onChange={handleChange} error={errors.type} required
         >
-          <option value="">Select type</option>
+          <option value="">{t('Select.select_type')}</option>
           {consultationTypes.map(type => (
-            <option key={type} value={type}>{type}</option>
+            <option key={type} value={type}>{t(`consultTypes.${type}`)}</option>
           ))}
         </Select>
       )}
@@ -115,7 +115,7 @@ export default function BookingForm({ consultationTypes = [], availableSlots = [
       <Textarea
         label={t('booking.description')} name="description" value={form.description}
         onChange={handleChange}
-        placeholder="Describe your symptoms or reason for visit..."
+        placeholder={t('placeholder_message')}
         rows={3}
       />
 

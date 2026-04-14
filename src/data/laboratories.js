@@ -15,14 +15,14 @@ export const laboratories = [
     openHours: "Mon–Fri: 07:00–18:00 | Sat: 07:00–14:00",
     certifications: ["ISO 15189", "Accreditée COFRAC", "CAP Certified"],
     tests: [
-      { id: 1, name: "Complete Blood Count (CBC)", category: "Hematology", price: 120, turnaround: "24h" },
-      { id: 2, name: "Lipid Panel", category: "Biochemistry", price: 180, turnaround: "24h" },
-      { id: 3, name: "HbA1c (Glycated Hemoglobin)", category: "Endocrinology", price: 150, turnaround: "48h" },
-      { id: 4, name: "Thyroid Panel (TSH, T3, T4)", category: "Endocrinology", price: 280, turnaround: "48h" },
-      { id: 5, name: "Urinalysis", category: "Urology", price: 80, turnaround: "24h" },
-      { id: 6, name: "PCR COVID-19", category: "Virology", price: 400, turnaround: "6h" },
-      { id: 7, name: "Hepatitis B & C Panel", category: "Serology", price: 350, turnaround: "48h" },
-      { id: 8, name: "Vitamin D & B12", category: "Biochemistry", price: 220, turnaround: "48h" }
+      { id: 1, name: "CBC", category: "hematology", price: 120, turnaround: "24h" },
+      { id: 2, name: "lipid_panel", category: "biochemistry", price: 180, turnaround: "24h" },
+      { id: 3, name: "HbA1c", category: "endocrinology", price: 150, turnaround: "48h" },
+      { id: 4, name: "thyroid_panel", category: "endocrinology", price: 280, turnaround: "48h" },
+      { id: 5, name: "urinalysis", category: "urology", price: 80, turnaround: "24h" },
+      { id: 6, name: "PCR_COVID19", category: "virology", price: 400, turnaround: "6h" },
+      { id: 7, name: "hepatitis_panel", category: "serology", price: 350, turnaround: "48h" },
+      { id: 8, name: "vitamin_panel", category: "biochemistry", price: 220, turnaround: "48h" }
     ],
     services: ["Home Collection", "Digital Results", "Express Analysis", "Group Packages", "Health Check-ups"],
     amenities: ["Free Parking", "Online Results Portal", "Home Visit", "Reception 24h"]
@@ -43,14 +43,14 @@ export const laboratories = [
     openHours: "Mon–Sat: 07:30–17:30",
     certifications: ["ISO 15189", "NF EN 45001"],
     tests: [
-      { id: 1, name: "Prenatal Genetic Screening", category: "Genetics", price: 1200, turnaround: "7 days" },
-      { id: 2, name: "Oncology Genetic Panel", category: "Oncology", price: 3500, turnaround: "14 days" },
-      { id: 3, name: "Microbiome Analysis", category: "Microbiology", price: 850, turnaround: "5 days" },
-      { id: 4, name: "Allergy Panel (100 allergens)", category: "Immunology", price: 680, turnaround: "72h" },
-      { id: 5, name: "Hormone Panel (Complete)", category: "Endocrinology", price: 450, turnaround: "48h" },
-      { id: 6, name: "Sperm Analysis", category: "Andrology", price: 320, turnaround: "48h" },
-      { id: 7, name: "Tumor Markers (CEA, AFP, PSA)", category: "Oncology", price: 500, turnaround: "48h" },
-      { id: 8, name: "Coagulation Panel", category: "Hematology", price: 240, turnaround: "24h" }
+      { id: 1, name: "Prenatal_Genetic_Screening", category: "genetics", price: 1200, turnaround: "7 days" },
+      { id: 2, name: "Oncology_Genetic_Panel", category: "oncology", price: 3500, turnaround: "14 days" },
+      { id: 3, name: "Microbiome_Analysis", category: "microbiology", price: 850, turnaround: "5 days" },
+      { id: 4, name: "Allergy_Panel", category: "immunology", price: 680, turnaround: "72h" },
+      { id: 5, name: "Hormone_Panel", category: "endocrinology", price: 450, turnaround: "48h" },
+      { id: 6, name: "Sperm_Analysis", category: "andrology", price: 320, turnaround: "48h" },
+      { id: 7, name: "Tumor_Markers", category: "oncology", price: 500, turnaround: "48h" },
+      { id: 8, name: "Coagulation_Panel", category: "hematology", price: 240, turnaround: "24h" }
     ],
     services: ["Genetic Counseling", "Home Collection", "Express Results", "Partner Hospitals Network"],
     amenities: ["Parking", "Digital Portal", "International Shipping", "Multilingual Staff"]
@@ -71,14 +71,14 @@ export const laboratories = [
     openHours: "Mon–Sat: 06:30–19:00 | Emergency 24/7",
     certifications: ["ISO 15189", "Accreditée Ministère Santé"],
     tests: [
-      { id: 1, name: "Complete Blood Count (CBC)", category: "Hematology", price: 100, turnaround: "6h" },
-      { id: 2, name: "Blood Culture", category: "Microbiology", price: 380, turnaround: "5 days" },
-      { id: 3, name: "Stool Culture & Parasite", category: "Microbiology", price: 200, turnaround: "48h" },
-      { id: 4, name: "HIV Screening (4th gen)", category: "Serology", price: 250, turnaround: "24h" },
-      { id: 5, name: "ANA / Anti-dsDNA Panel", category: "Immunology", price: 480, turnaround: "72h" },
-      { id: 6, name: "Full Biochemistry Panel", category: "Biochemistry", price: 350, turnaround: "24h" },
-      { id: 7, name: "Urine Culture", category: "Microbiology", price: 180, turnaround: "48h" },
-      { id: 8, name: "Ferritin & Iron Panel", category: "Hematology", price: 160, turnaround: "24h" }
+      { id: 1, name: "CBC", category: "hematology", price: 100, turnaround: "6h" },
+      { id: 2, name: "Blood_Culture", category: "microbiology", price: 380, turnaround: "5 days" },
+      { id: 3, name: "Stool_Culture_Parasite", category: "microbiology", price: 200, turnaround: "48h" },
+      { id: 4, name: "HIV_Screening", category: "serology", price: 250, turnaround: "24h" },
+      { id: 5, name: "ANA_Anti_dsDNA_Panel", category: "immunology", price: 480, turnaround: "72h" },
+      { id: 6, name: "Full_Biochemistry_Panel", category: "biochemistry", price: 350, turnaround: "24h" },
+      { id: 7, name: "Urine_Culture", category: "microbiology", price: 180, turnaround: "48h" },
+      { id: 8, name: "Ferritin_Iron_Panel", category: "hematology", price: 160, turnaround: "24h" }
     ],
     services: ["24/7 Emergency Testing", "Hospital Partnerships", "Home Collection", "Senior Packages"],
     amenities: ["Free Parking", "Prayer Room", "WiFi Waiting Room", "Elderly Assistance", "Online Portal"]

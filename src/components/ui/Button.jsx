@@ -21,7 +21,7 @@ export default function Button({
   return (
     <button
       disabled={disabled || loading}
-      className={`${base} ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`${base} cursor-pointer ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
       {loading && (

@@ -9,7 +9,7 @@ import { RiHeartPulseLine } from 'react-icons/ri';
 const langs = [
   { code: 'en', label: 'English', flag: '/assets/flags/uk.png' },
   { code: 'fr', label: 'Français', flag: '/assets/flags/fr.png' },
-  { code: 'ar', label: 'العربية', flag: '/assets/flags/ar.png' },
+  { code: 'ar', label: 'العربية', flag: '/assets/flags/mr.png' },
 ];
 
 export default function Navbar() {
@@ -136,7 +136,7 @@ export default function Navbar() {
                     onClick={() => setUserOpen(false)}
                     className="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
                   >
-                    <FiGrid size={14} /> Dashboard
+                    <FiGrid size={14} /> {t('nav.dashboard')}
                   </Link>
                   <button
                     onClick={handleLogout}
@@ -211,7 +211,7 @@ export default function Navbar() {
                 <Link to="/dashboard" onClick={() => setMobileOpen(false)}
                   className="flex items-center gap-2 px-4 py-2.5 bg-slate-50 rounded-xl text-sm font-medium text-slate-700"
                 >
-                  <FiGrid size={15} /> Dashboard
+                  <FiGrid size={15} /> {t('nav.dashboard')}
                 </Link>
                 <button onClick={() => { handleLogout(); setMobileOpen(false); }}
                   className="flex items-center gap-2 px-4 py-2.5 bg-red-50 rounded-xl text-sm font-medium text-red-600"

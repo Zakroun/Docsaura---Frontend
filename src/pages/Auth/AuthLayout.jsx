@@ -1,18 +1,23 @@
 import { Link } from 'react-router-dom';
 import { RiHeartPulseLine } from 'react-icons/ri';
+import { useTranslation } from 'react-i18next';
 
 export default function AuthLayout({ children, title, subtitle }) {
+  const {t} = useTranslation();
   return (
     <div className="min-h-screen bg-slate-50 flex">
-      {/* Left panel */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900 flex-col justify-between p-12 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-teal-500/10 blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-cyan-500/8 blur-3xl" />
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(20,184,166,0.08) 1px, transparent 0)',
-            backgroundSize: '32px 32px'
-          }} />
+          {/* Image */}
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: 'url(/assets/hero2.jpg)',
+            }}
+          />
+
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/50" />
         </div>
         <Link to="/" className="flex items-center gap-2.5 relative z-10">
           <div className="w-9 h-9 rounded-xl bg-teal-500/20 border border-teal-500/30 flex items-center justify-center">
@@ -24,13 +29,13 @@ export default function AuthLayout({ children, title, subtitle }) {
         </Link>
         <div className="relative z-10">
           <blockquote className="text-xl font-medium text-white leading-relaxed mb-4">
-            "DocsAura helped me find a specialist in minutes. The booking process was seamless."
+            {t('auth.auth_subtitle')}
           </blockquote>
           <div className="flex items-center gap-3">
             <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Aicha" className="w-10 h-10 rounded-full object-cover" />
             <div>
               <p className="text-white font-semibold text-sm">Aicha Bennani</p>
-              <p className="text-slate-400 text-xs">Patient, Rabat</p>
+              <p className="text-slate-100 text-xs">{t('auth.auth_user')}</p>
             </div>
           </div>
         </div>
@@ -38,13 +43,12 @@ export default function AuthLayout({ children, title, subtitle }) {
           {[['120+', 'Doctors'], ['50k+', 'Patients'], ['4.9★', 'Rating']].map(([v, l]) => (
             <div key={l}>
               <p className="text-2xl font-extrabold text-white" style={{ fontFamily: 'Outfit, sans-serif' }}>{v}</p>
-              <p className="text-slate-400 text-xs">{l}</p>
+              <p className="text-slate-400 text-xs">{t('auth.auth_' + l.toLowerCase())}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Right panel */}
       <div className="flex-1 flex flex-col justify-center items-center px-4 sm:px-8 py-12">
         <div className="w-full max-w-sm">
           <div className="mb-8">

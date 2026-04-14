@@ -37,7 +37,6 @@ export default function DoctorCard({ doctor }) {
       <div className="px-4 pt-10 pb-4">
         <h3 className="font-semibold text-slate-900 text-base truncate">{doctor.name}</h3>
         <StarRating rating={doctor.rating} reviewCount={doctor.reviewCount} size={12} />
-
         <div className="mt-3 flex flex-col gap-1.5">
           <div className="flex items-center gap-2 text-xs text-slate-500">
             <FiMapPin size={12} className="shrink-0 text-teal-600" />
@@ -58,7 +57,7 @@ export default function DoctorCard({ doctor }) {
         <div className="mt-4 flex items-center justify-between">
           <div>
             <p className="text-xs text-slate-400">From</p>
-            <p className="text-sm font-bold text-slate-900">{doctor.consultationFee} <span className="text-xs font-normal text-slate-500">MAD</span></p>
+            <p className="text-sm font-bold text-slate-900">{doctor.consultationFee} <span className="text-xs font-normal text-slate-500">{t('price')}</span></p>
           </div>
           <Link
             to={`/doctors/${doctor.id}`}

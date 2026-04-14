@@ -13,7 +13,7 @@ export const clinics = [
     cover: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=1200&q=80",
     description: "Clinique Al Amal is one of Rabat's premier private medical facilities, offering comprehensive healthcare across 12 specialties. Founded in 2005, we combine French medical excellence with Moroccan warmth to deliver outstanding patient care.",
     openHours: "Mon–Fri: 08:00–20:00 | Sat: 08:00–16:00 | Sun: Emergency Only",
-    services: ["Cardiology", "Orthopedics", "Dermatology", "Gynecology", "Neurology", "Ophthalmology", "Radiology", "Laboratory", "Emergency Care", "Surgery"],
+    services: ["cardiology", "orthopedics", "dermatology", "gynecology", "neurology", "ophthalmology", "radiology", "laboratory", "emergency_care", "surgery"],
     doctors: [
       { id: 1, name: "Dr. Fatima Zahra El Mansouri", specialty: "Cardiologist", avatar: "https://randomuser.me/api/portraits/women/44.jpg" },
       { id: 4, name: "Dr. Karim Lahlou", specialty: "Neurologist", avatar: "https://randomuser.me/api/portraits/men/62.jpg" },
@@ -37,7 +37,7 @@ export const clinics = [
     cover: "https://images.unsplash.com/photo-1519494080410-f9aa76cb4283?w=1200&q=80",
     description: "Centre Médical Hassan II is a state-of-the-art surgical center in Casablanca's Maarif district. Renowned for orthopedic surgery, trauma care, and sports medicine, we feature the most advanced operating rooms in North Africa.",
     openHours: "Mon–Sat: 07:30–19:00 | Emergency 24/7",
-    services: ["Orthopedic Surgery", "Sports Medicine", "Traumatology", "Physical Therapy", "Radiology", "Anesthesia", "ICU"],
+    services: ["orthopedic_surgery", "sport_medicine", "traumatology", "physical_therapy", "radiology", "anesthesia", "icu"],
     doctors: [
       { id: 2, name: "Dr. Youssef Benali", specialty: "Orthopedic Surgeon", avatar: "https://randomuser.me/api/portraits/men/52.jpg" },
       { id: 6, name: "Dr. Hassan Tazi", specialty: "Traumatologist", avatar: "https://randomuser.me/api/portraits/men/78.jpg" }
@@ -60,7 +60,7 @@ export const clinics = [
     cover: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80",
     description: "Clinique Saâda has been serving families in Fès since 1998. Specializing in pediatrics, maternity care, and neonatology, we provide a warm and safe environment for mothers and children. Our NICU is one of the most advanced in the Fès-Meknès region.",
     openHours: "Open 24/7",
-    services: ["Pediatrics", "Maternity", "Neonatology", "Gynecology", "Vaccination", "Lactation Support", "Child Development"],
+    services: ["pediatrics", "maternity", "neonatology", "gynecology", "vaccination", "lactation_support", "child_development"],
     doctors: [
       { id: 3, name: "Dr. Laila Chraibi", specialty: "Pediatrician", avatar: "https://randomuser.me/api/portraits/women/68.jpg" },
       { id: 7, name: "Dr. Meriem Berrada", specialty: "Gynecologist", avatar: "https://randomuser.me/api/portraits/women/49.jpg" }

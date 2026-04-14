@@ -25,7 +25,7 @@ export const doctors = [
       { day: "Saturday", hours: "Closed" },
       { day: "Sunday", hours: "Closed" }
     ],
-    consultationTypes: ["In-Person", "Video Call", "Home Visit"],
+    consultationTypes: ["in_person", "video_call", "home_visit"],
     consultationFee: 400,
     availableSlots: ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"],
     tags: ["Heart", "ECG", "Echo", "Hypertension"],
@@ -61,7 +61,7 @@ export const doctors = [
       { day: "Saturday", hours: "09:00 – 13:00" },
       { day: "Sunday", hours: "Closed" }
     ],
-    consultationTypes: ["In-Person", "Video Call"],
+    consultationTypes: ["in_person", "video_call"],
     consultationFee: 500,
     availableSlots: ["08:30", "09:30", "10:30", "11:30", "14:00", "15:00"],
     tags: ["Joints", "Spine", "Sports", "Arthroscopy"],
@@ -97,7 +97,7 @@ export const doctors = [
       { day: "Saturday", hours: "10:00 – 14:00" },
       { day: "Sunday", hours: "Closed" }
     ],
-    consultationTypes: ["In-Person", "Video Call"],
+    consultationTypes: ["in_person", "video_call"],
     consultationFee: 300,
     availableSlots: ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00", "17:00"],
     tags: ["Children", "Vaccines", "Nutrition", "Development"],

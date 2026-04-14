@@ -45,8 +45,8 @@ export default function Contact() {
       {/* Header */}
       <div className="bg-teal-900 py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4" style={{ fontFamily: 'Outfit, sans-serif' }}>Contact Us</h1>
-          <p className="text-slate-300 max-w-lg mx-auto text-lg">Have a question or want to partner with us? We'd love to hear from you.</p>
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4" style={{ fontFamily: 'Outfit, sans-serif' }}>{t('contact_form.title')}</h1>
+          <p className="text-slate-300 max-w-lg mx-auto text-lg">{t('contact_form.subtitle')}</p>
         </div>
       </div>
 
@@ -55,8 +55,8 @@ export default function Contact() {
           {/* Left — info */}
           <div className="lg:col-span-2 space-y-6">
             <div>
-              <h2 className="text-2xl font-bold text-slate-900 mb-2" style={{ fontFamily: 'Outfit, sans-serif' }}>We're here to help</h2>
-              <p className="text-slate-500 text-sm leading-relaxed">Whether you're a patient, doctor, or clinic — reach out and our team will get back to you within 24 hours.</p>
+              <h2 className="text-2xl font-bold text-slate-900 mb-2" style={{ fontFamily: 'Outfit, sans-serif' }}>{t('contact_form.left_title')}</h2>
+              <p className="text-slate-500 text-sm leading-relaxed">{t('contact_form.left_subtitle')}</p>
             </div>
 
             <div className="space-y-4">
@@ -83,7 +83,7 @@ export default function Contact() {
               className="flex items-center gap-3 px-5 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl transition-colors text-sm w-fit"
             >
               <FaWhatsapp size={20} />
-              Chat on WhatsApp
+              {t('contact_form.whatsapp')}
             </a>
           </div>
 
@@ -95,29 +95,29 @@ export default function Contact() {
                   <div className="w-16 h-16 rounded-full bg-emerald-50 border-2 border-emerald-200 flex items-center justify-center mb-5">
                     <FiCheckCircle size={28} className="text-emerald-500" />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">Message Sent!</h3>
-                  <p className="text-slate-500 text-sm max-w-xs">Thanks for reaching out. We'll get back to you within 24 hours.</p>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{t('contact_sent')}</h3>
+                  <p className="text-slate-500 text-sm max-w-xs">{t('contact_submitted')}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-                  <h3 className="text-xl font-bold text-slate-900" style={{ fontFamily: 'Outfit, sans-serif' }}>Send us a message</h3>
+                  <h3 className="text-xl font-bold text-slate-900" style={{ fontFamily: 'Outfit, sans-serif' }}>{t('contact_form.right_title')}</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <Input label="Full Name" name="name" value={form.name} onChange={handleChange} error={errors.name} placeholder="Your name" required />
-                    <Input label="Email" name="email" type="email" value={form.email} onChange={handleChange} error={errors.email} placeholder="your@email.com" required />
+                    <Input label={t('contact_form.fullname')} name="name" value={form.name} onChange={handleChange} error={errors.name} placeholder={t('contact_form.fullname_placeholder')} required />
+                    <Input label={t('contact_form.email')} name="email" type="email" value={form.email} onChange={handleChange} error={errors.email} placeholder={t('contact_form.email_placeholder')} required />
                   </div>
-                  <Select label="Subject" name="subject" value={form.subject} onChange={handleChange}>
-                    <option value="">Select a subject</option>
-                    <option value="general">General Inquiry</option>
-                    <option value="booking">Booking Issue</option>
-                    <option value="partnership">Partnership</option>
-                    <option value="doctor">Join as a Doctor</option>
-                    <option value="clinic">Register a Clinic</option>
-                    <option value="feedback">Feedback</option>
+                  <Select label={t('contact_form.subject')} name="subject" value={form.subject} onChange={handleChange}>
+                    <option value="">{t('contact_form.select_subject')}</option>
+                    <option value="general">{t('contact_form.options.subject_1')}</option>
+                    <option value="booking">{t('contact_form.options.subject_2')}</option>
+                    <option value="partnership">{t('contact_form.options.subject_3')}</option>
+                    <option value="doctor">{t('contact_form.options.subject_4')}</option>
+                    <option value="clinic">{t('contact_form.options.subject_5')}</option>
+                    <option value="feedback">{t('contact_form.options.subject_6')}</option>
                   </Select>
-                  <Textarea label="Message" name="message" value={form.message} onChange={handleChange} error={errors.message} placeholder="Tell us how we can help..." required rows={5} />
+                  <Textarea label={t('contact_form.message')} name="message" value={form.message} onChange={handleChange} error={errors.message} placeholder={t('contact_form.message_placeholder')} required rows={5} />
                   <Button type="submit" className="w-full" size="lg" loading={loading}>
                     <FiSend size={16} />
-                    Send Message
+                    {t('contact_form.submit')}
                   </Button>
                 </form>
               )}

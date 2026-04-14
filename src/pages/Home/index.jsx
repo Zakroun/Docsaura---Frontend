@@ -19,35 +19,20 @@ import ClinicCard from '../../components/common/ClinicCard';
 import LabCard from '../../components/common/LabCard';
 import SectionHeader from '../../components/common/SectionHeader';
 
-const specialties = [
-  { label: 'Cardiology', icon: RiHeartPulseLine, color: 'text-rose-600 bg-rose-50 border-rose-100', hoverborder: 'hover:border-rose-300' },
-  { label: 'Pediatrics', icon: RiUserHeartLine, color: 'text-violet-600 bg-violet-50 border-violet-100', hoverborder: 'hover:border-violet-300' },
-  { label: 'Orthopedics', icon: RiStethoscopeLine, color: 'text-blue-600 bg-blue-50 border-blue-100', hoverborder: 'hover:border-blue-300' },
-  { label: 'Dermatology', icon: HiOutlineSparkles, color: 'text-amber-600 bg-amber-50 border-amber-100', hoverborder: 'hover:border-amber-300' },
-  { label: 'Neurology', icon: RiShieldCheckLine, color: 'text-emerald-600 bg-emerald-50 border-emerald-100', hoverborder: 'hover:border-emerald-300' },
-  { label: 'Gynecology', icon: FiStar, color: 'text-pink-600 bg-pink-50 border-pink-100', hoverborder: 'hover:border-pink-300' },
-];
-
-const consultTypes = [
-  { icon: FiCalendar, label: 'In-Person', desc: 'Visit the clinic', color: 'bg-teal-50 border-teal-200 text-teal-700' },
-  { icon: FiVideo, label: 'Video Call', desc: 'Consult from home', color: 'bg-blue-50 border-blue-200 text-blue-700' },
-  { icon: FiHome, label: 'Home Visit', desc: 'Doctor comes to you', color: 'bg-violet-50 border-violet-200 text-violet-700' },
-];
-
 const testimonials = [
   {
-    text: "Found an amazing cardiologist in 2 minutes. The booking was seamless and I got a confirmation instantly.",
-    author: "Khadija El Fassi", role: "Patient, Rabat",
+    text: "testimonial_1_text",
+    author: "testimonial_1_author", role: "testimonial_1_role",
     avatar: "https://randomuser.me/api/portraits/women/44.jpg", rating: 5
   },
   {
-    text: "As a doctor, DocsAura has completely transformed how I manage my appointments. Zero no-shows!",
-    author: "Dr. Amine Lahlou", role: "Neurologist, Casablanca",
+    text: "testimonial_2_text",
+    author: "testimonial_2_author", role: "testimonial_2_role",
     avatar: "https://randomuser.me/api/portraits/men/52.jpg", rating: 5
   },
   {
-    text: "Booked lab tests for my whole family in one go. Results came digitally the next morning.",
-    author: "Rachida Bennani", role: "Patient, Fès",
+    text: "testimonial_3_text",
+    author: "testimonial_3_author", role: "testimonial_3_role",
     avatar: "https://randomuser.me/api/portraits/women/68.jpg", rating: 5
   },
 ];
@@ -57,7 +42,19 @@ export default function Home() {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [activeTab, setActiveTab] = useState('doctors');
-
+  const specialties = [
+    { label: t('home.specialties_Cardiology') , icon: RiHeartPulseLine, color: 'text-rose-600 bg-rose-50 border-rose-100', hoverborder: 'hover:border-rose-300' },
+    { label: t('home.specialties_Pediatrics') , icon: RiUserHeartLine, color: 'text-violet-600 bg-violet-50 border-violet-100', hoverborder: 'hover:border-violet-300' },
+    { label: t('home.specialties_Orthopedics') , icon: RiStethoscopeLine, color: 'text-blue-600 bg-blue-50 border-blue-100', hoverborder: 'hover:border-blue-300' },
+    { label: t('home.specialties_Dermatology') , icon: HiOutlineSparkles, color: 'text-amber-600 bg-amber-50 border-amber-100', hoverborder: 'hover:border-amber-300' },
+    { label: t('home.specialties_Neurology') , icon: RiShieldCheckLine, color: 'text-emerald-600 bg-emerald-50 border-emerald-100', hoverborder: 'hover:border-emerald-300' },
+    { label: t('home.specialties_Gynecology') , icon: FiStar, color: 'text-pink-600 bg-pink-50 border-pink-100', hoverborder: 'hover:border-pink-300' },
+  ];
+  const consultTypes = [
+  { icon: FiCalendar, label: t('consultTypes.in_person'), desc: t('consultTypes.in_person_desc'), color: 'bg-teal-50 border-teal-200 text-teal-700' },
+  { icon: FiVideo, label: t('consultTypes.video_call'), desc: t('consultTypes.video_call_desc'), color: 'bg-blue-50 border-blue-200 text-blue-700' },
+  { icon: FiHome, label: t('consultTypes.home_visit'), desc: t('consultTypes.home_visit_desc'), color: 'bg-violet-50 border-violet-200 text-violet-700' },
+];
   const handleSearch = (e) => {
     e.preventDefault();
     const q = query.trim();
@@ -71,9 +68,7 @@ export default function Home() {
 
   return (
     <div className="overflow-x-hidden">
-
       {/* ─── HERO ─── */}
-      {/* src background image /assets/hero1.jpg */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         {/* Background Image */}
         <div
@@ -98,12 +93,12 @@ export default function Home() {
           }} />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full py-28 lg:py-36">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full py-8 lg:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left */}
             <div>
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-teal-500/10 border border-teal-500/25 rounded-full text-teal-400 text-xs font-semibold mb-8 tracking-wide">
-                Morocco's #1 Healthcare Platform
+                {t('home.top_title')}
               </div>
 
               <h1
@@ -133,7 +128,7 @@ export default function Home() {
                         onClick={() => setActiveTab(key)}
                         className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all ${activeTab === key ? 'bg-teal-600 text-white' : 'text-slate-400 hover:text-white'}`}
                       >
-                        <Icon size={13} /> {key}
+                        <Icon size={13} /> {t(`home.${key}`)}
                       </button>
                     ))}
                   </div>
@@ -156,7 +151,7 @@ export default function Home() {
               </form>
 
               {/* Specialty pills */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-10">
                 {specialties.map(s => (
                   <button
                     key={s.label}
@@ -188,16 +183,16 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="flex gap-1.5 mt-2">
-                      {doctors[0].consultationTypes.map(t => (
-                        <span key={t} className="px-2 py-0.5 bg-white/8 border border-white/10 rounded-md text-[10px] text-slate-300">{t}</span>
+                      {doctors[0].consultationTypes.map(c => (
+                        <span key={c} className="px-2 py-0.5 bg-white/8 border border-white/10 rounded-md text-[10px] text-slate-300">{t('consultTypes.' + c)}</span>
                       ))}
                     </div>
                   </div>
                 </div>
                 <div className="mt-4 pt-4 border-t border-white/8 flex items-center justify-between">
-                  <p className="text-xs text-slate-400">Next available: <span className="text-teal-400 font-semibold">Today 14:00</span></p>
+                  <p className="text-xs text-slate-400">{t('home.next')}: <span className="text-teal-400 font-semibold">{t('home.today')} 14:00</span></p>
                   <Link to={`/doctors/${doctors[0].id}`} className="px-4 py-1.5 bg-teal-600 text-white text-xs font-semibold rounded-lg hover:bg-teal-500 transition-colors">
-                    Book
+                    {t('home.book')}
                   </Link>
                 </div>
               </div>
@@ -205,7 +200,7 @@ export default function Home() {
               {/* Stat cards */}
               <div className="absolute bottom-24 left-0 bg-white/6 backdrop-blur-xl border border-white/10 rounded-2xl p-4 w-44">
                 <p className="text-3xl font-extrabold text-white" style={{ fontFamily: 'Outfit' }}>50k+</p>
-                <p className="text-xs text-slate-400 mt-1">Happy patients served</p>
+                <p className="text-xs text-slate-400 mt-1">{t('home.happy_patients')}</p>
                 <div className="flex -space-x-2 mt-3">
                   {['women/12', 'men/22', 'women/31', 'men/47'].map(s => (
                     <img key={s} src={`https://randomuser.me/api/portraits/${s}.jpg`} className="w-7 h-7 rounded-full border-2 border-slate-900 object-cover" alt="" />
@@ -216,10 +211,10 @@ export default function Home() {
               <div className="absolute bottom-24 right-8 bg-emerald-500/10 backdrop-blur-xl border border-emerald-500/20 rounded-2xl p-4 w-44">
                 <div className="flex items-center gap-2 mb-2">
                   <FiShield size={16} className="text-emerald-400" />
-                  <span className="text-xs text-emerald-400 font-semibold">Verified</span>
+                  <span className="text-xs text-emerald-400 font-semibold">{t('home.verified')}</span>
                 </div>
                 <p className="text-2xl font-extrabold text-white" style={{ fontFamily: 'Outfit' }}>120+</p>
-                <p className="text-xs text-slate-400 mt-1">Certified doctors</p>
+                <p className="text-xs text-slate-400 mt-1">{t('home.certified_doctors')}</p>
               </div>
             </div>
           </div>
@@ -250,7 +245,7 @@ export default function Home() {
       {/* ─── SPECIALTIES ─── */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <SectionHeader eyebrow="Browse by Specialty" title="What are you looking for?" />
+          <SectionHeader eyebrow={t('home.specialties_eyebrow')} title={t('home.specialties_title')} description={t('home.specialties_desc')} />
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {specialties.map((s, i) => (
               <button
@@ -272,7 +267,7 @@ export default function Home() {
       {/* ─── HOW IT WORKS ─── */}
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <SectionHeader eyebrow="How it works" title={t('home.how_title')} />
+          <SectionHeader eyebrow={t('home.how_eyebrow')} title={t('home.how_title')} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             <div className="hidden md:block absolute top-8 left-[calc(16.67%+24px)] right-[calc(16.67%+24px)] h-px bg-gradient-to-r from-teal-200 via-teal-300 to-teal-200" />
             {[
@@ -323,8 +318,8 @@ export default function Home() {
           {/* Tab header */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
             <div>
-              <p className="text-teal-700 text-xs font-semibold uppercase tracking-widest mb-2">Browse All</p>
-              <h2 className="text-3xl font-bold text-slate-900" style={{ fontFamily: 'Outfit, sans-serif' }}>Top Picks For You</h2>
+              <p className="text-teal-700 text-xs font-semibold uppercase tracking-widest mb-2">{t('home.browse_eyebrow')}</p>
+              <h2 className="text-3xl font-bold text-slate-900" style={{ fontFamily: 'Outfit, sans-serif' }}>{t('home.browse_title')}</h2>
             </div>
             <div className="flex gap-1 bg-white border border-slate-200 rounded-xl p-1">
               {[
@@ -366,21 +361,21 @@ export default function Home() {
       {/* ─── TESTIMONIALS ─── */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <SectionHeader eyebrow="Testimonials" title="What patients say" subtitle="Real experiences from DocsAura users across Morocco." />
+          <SectionHeader eyebrow={t('home.testimonials_eyebrow')} title={t('home.testimonials_title')} subtitle={t('home.testimonials_subtitle')} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
+            {testimonials.map((a, i) => (
               <div key={i} className="bg-slate-50 border border-slate-100 rounded-2xl p-6 flex flex-col gap-4 animate-fade-in-up" style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}>
                 <div className="flex gap-0.5">
-                  {Array.from({ length: t.rating }).map((_, j) => (
+                  {Array.from({ length: a.rating }).map((_, j) => (
                     <FiStar key={j} size={14} className="text-amber-400 fill-amber-400" />
                   ))}
                 </div>
-                <p className="text-slate-600 text-sm leading-relaxed flex-1">"{t.text}"</p>
+                <p className="text-slate-600 text-sm leading-relaxed flex-1">"{t('testimonials.' + a.text)}"</p>
                 <div className="flex items-center gap-3 pt-2 border-t border-slate-200">
-                  <img src={t.avatar} alt={t.author} className="w-10 h-10 rounded-full object-cover" />
+                  <img src={a.avatar} alt={t('testimonials.' + a.author)} className="w-10 h-10 rounded-full object-cover" />
                   <div>
-                    <p className="text-slate-900 font-semibold text-sm">{t.author}</p>
-                    <p className="text-slate-400 text-xs">{t.role}</p>
+                    <p className="text-slate-900 font-semibold text-sm">{t('testimonials.' + a.author)}</p>
+                    <p className="text-slate-400 text-xs">{t('testimonials.' + a.role)}</p>
                   </div>
                 </div>
               </div>
@@ -400,20 +395,20 @@ export default function Home() {
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/15 rounded-full text-teal-100 text-xs font-semibold mb-8">
             <RiHeartPulseLine size={13} />
-            Start your health journey today
+            {t('home.cta_top_title')}
           </div>
           <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-5 leading-tight" style={{ fontFamily: 'Outfit, sans-serif' }}>
-            Your health deserves the best care
+            {t('home.cta_title')}
           </h2>
           <p className="text-teal-100 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-            Join 50,000+ Moroccan patients who trust DocsAura to connect them with verified healthcare providers.
+            {t('home.cta_desc')}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/doctors" className="flex items-center gap-2 px-8 py-4 bg-white text-teal-800 font-bold rounded-xl hover:bg-teal-50 transition-colors text-sm shadow-lg shadow-black/10">
-              Find a Doctor <FiArrowRight size={16} />
+              {t('home.cta_find')} <FiArrowRight size={16} />
             </Link>
             <Link to="/register" className="flex items-center gap-2 px-8 py-4 bg-teal-600/80 border border-teal-500/50 text-white font-bold rounded-xl hover:bg-teal-600 transition-colors text-sm">
-              Create Free Account
+              {t('home.cta_register')}
             </Link>
           </div>
         </div>

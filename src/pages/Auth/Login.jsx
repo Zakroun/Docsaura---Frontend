@@ -37,25 +37,25 @@ export default function Login() {
     await new Promise(r => setTimeout(r, 1200));
     // Simulate successful login
     login({ id: 1, name: 'Demo User', email: form.email });
-    addToast('Welcome back to DocsAura!', 'success');
+    addToast(t('auth.login_success'), 'success');
     setLoading(false);
     navigate('/');
   };
 
   return (
-    <AuthLayout title={t('auth.login_title')} subtitle="Sign in to manage your appointments">
+    <AuthLayout title={t('auth.login_title')} subtitle={t('auth.login_subtitle')}>
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <Input
           label={t('auth.email')} name="email" type="email"
           value={form.email} onChange={handleChange} error={errors.email}
-          placeholder="your@email.com" required icon={FiMail}
+          placeholder={t('auth.email_placeholder')} required icon={FiMail}
         />
         <div className="relative">
           <Input
             label={t('auth.password')} name="password"
             type={showPass ? 'text' : 'password'}
             value={form.password} onChange={handleChange} error={errors.password}
-            placeholder="••••••••" required icon={FiLock}
+            placeholder={t('auth.password_placeholder')} required icon={FiLock}
           />
           <button
             type="button"
@@ -69,7 +69,7 @@ export default function Login() {
         <div className="flex items-center justify-between">
           <label className="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
             <input type="checkbox" className="rounded border-slate-300 text-teal-600" />
-            Remember me
+            {t('auth.remember')}
           </label>
           <Link to="/forgot-password" className="text-sm text-teal-700 hover:text-teal-800 font-medium">
             {t('auth.forgot')}
@@ -81,9 +81,9 @@ export default function Login() {
         </Button>
 
         {/* Demo hint */}
-        <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
+        {/* <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center">
           <p className="text-xs text-slate-500">Demo: use any valid email + 6+ char password</p>
-        </div>
+        </div> */}
       </form>
 
       <p className="text-center text-sm text-slate-500 mt-6">

@@ -16,6 +16,7 @@ import { useToast } from '../../context/ToastContext';
 import { sanitize } from '../../utils';
 
 function ReviewForm({ onSubmit }) {
+  const {t} = useTranslation();
   const { addToast } = useToast();
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
@@ -33,17 +34,17 @@ function ReviewForm({ onSubmit }) {
     setLoading(true);
     await new Promise(r => setTimeout(r, 800));
     onSubmit({ author: sanitize(name), text: sanitize(text), rating, date: new Date().toISOString().split('T')[0] });
-    addToast('Thank you for your review!', 'success');
+    addToast(t('review_submitted'), 'success');
     setRating(0); setText(''); setName('');
     setLoading(false);
   };
 
   return (
     <form onSubmit={handleSubmit} className="bg-slate-50 rounded-2xl border border-slate-100 p-5 space-y-4">
-      <h3 className="font-semibold text-slate-900 text-sm">Write a Review</h3>
+      <h3 className="font-semibold text-slate-900 text-sm">{t('doctors.write_review')}</h3>
       {/* Star selector */}
       <div>
-        <p className="text-xs text-slate-500 mb-2">Your Rating</p>
+        <p className="text-xs text-slate-500 mb-2">{t('doctors.your_rating')}</p>
         <div className="flex gap-1">
           {[1,2,3,4,5].map(s => (
             <button key={s} type="button"
@@ -58,18 +59,18 @@ function ReviewForm({ onSubmit }) {
       </div>
       <input
         value={name} onChange={e => setName(e.target.value)}
-        placeholder="Your name"
+        placeholder={t('doctors.your_name')}
         className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/10 transition-all"
       />
       <textarea
         value={text} onChange={e => setText(e.target.value.slice(0, 500))}
-        placeholder="Share your experience with this doctor..."
+        placeholder={t('doctors.your_review_desc')}
         rows={3}
         className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/10 transition-all resize-none"
       />
       {error && <p className="text-xs text-red-500">{error}</p>}
       <Button type="submit" size="sm" loading={loading}>
-        <FiMessageSquare size={13} /> Submit Review
+        <FiMessageSquare size={13} /> {t('doctors.submit_review')}
       </Button>
     </form>
   );
@@ -99,21 +100,20 @@ export default function DoctorDetails() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-4">
         <div className="text-6xl">👨‍⚕️</div>
-        <h2 className="text-2xl font-bold text-slate-900">Doctor not found</h2>
+        <h2 className="text-2xl font-bold text-slate-900">{t('doctors.not_found_title')}</h2>
         <Link to="/doctors" className="flex items-center gap-2 text-teal-700 hover:underline">
-          <FiArrowLeft size={16} /> Back to Doctors
+          <FiArrowLeft size={16} /> {t('doctors.back')}
         </Link>
       </div>
     );
   }
-
+  const consultTypes = t('consultation_types', { returnObjects: true }) || {};
   const doctor = { ...doctorData, comments: localComments };
   const avgRating = (doctor.comments.reduce((a, c) => a + c.rating, 0) / doctor.comments.length).toFixed(1);
-
   const tabs = [
-    { key: 'about', label: 'About' },
-    { key: 'schedule', label: 'Schedule' },
-    { key: 'reviews', label: `Reviews (${doctor.comments.length})` },
+    { key: 'about', label: t('tabs.about') },
+    { key: 'schedule', label: t('tabs.schedule') },
+    { key: 'reviews', label: `${t('tabs.reviews')} (${doctor.comments.length})` },
   ];
 
   return (
@@ -170,15 +170,15 @@ export default function DoctorDetails() {
               <div className="mt-5 pt-5 border-t border-slate-100 grid grid-cols-3 gap-4 text-center">
                 <div>
                   <p className="text-2xl font-extrabold text-teal-700" style={{ fontFamily: 'Outfit' }}>{doctor.experience}+</p>
-                  <p className="text-xs text-slate-500 mt-0.5">Years Exp.</p>
+                  <p className="text-xs text-slate-500 mt-0.5">{t('Dashboard.stats.experience')}</p>
                 </div>
                 <div>
                   <p className="text-2xl font-extrabold text-teal-700" style={{ fontFamily: 'Outfit' }}>{doctor.reviewCount}</p>
-                  <p className="text-xs text-slate-500 mt-0.5">Reviews</p>
+                  <p className="text-xs text-slate-500 mt-0.5">{t('Dashboard.stats.reviews')}</p>
                 </div>
                 <div>
                   <p className="text-2xl font-extrabold text-teal-700" style={{ fontFamily: 'Outfit' }}>{avgRating}</p>
-                  <p className="text-xs text-slate-500 mt-0.5">Rating</p>
+                  <p className="text-xs text-slate-500 mt-0.5">{t('Dashboard.stats.rating')}</p>
                 </div>
               </div>
             </div>
@@ -198,7 +198,7 @@ export default function DoctorDetails() {
             {activeTab === 'about' && (
               <div className="space-y-5">
                 <div className="bg-white rounded-2xl border border-slate-100 p-6">
-                  <h2 className="font-bold text-slate-900 text-lg mb-3" style={{ fontFamily: 'Outfit' }}>About</h2>
+                  <h2 className="font-bold text-slate-900 text-lg mb-3" style={{ fontFamily: 'Outfit' }}>{t('tabs.about')}</h2>
                   <p className="text-slate-600 text-sm leading-relaxed">{doctor.description}</p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {doctor.tags.map(tag => <Badge key={tag} variant="teal">{tag}</Badge>)}
@@ -207,7 +207,7 @@ export default function DoctorDetails() {
 
                 <div className="bg-white rounded-2xl border border-slate-100 p-6">
                   <h2 className="font-bold text-slate-900 text-lg mb-4 flex items-center gap-2" style={{ fontFamily: 'Outfit' }}>
-                    <RiGraduationCapLine size={20} className="text-teal-600" /> Education
+                    <RiGraduationCapLine size={20} className="text-teal-600" /> {t('tabs.education')}
                   </h2>
                   <div className="space-y-4">
                     {doctor.education.map((edu, i) => (
@@ -223,11 +223,11 @@ export default function DoctorDetails() {
                 </div>
 
                 <div className="bg-white rounded-2xl border border-slate-100 p-6">
-                  <h2 className="font-bold text-slate-900 text-lg mb-4" style={{ fontFamily: 'Outfit' }}>Consultation Types</h2>
+                  <h2 className="font-bold text-slate-900 text-lg mb-4" style={{ fontFamily: 'Outfit' }}>{t('tabs.consultationTypes')}</h2>
                   <div className="flex flex-wrap gap-3">
                     {doctor.consultationTypes.map(ct => (
                       <div key={ct} className="flex items-center gap-2 px-4 py-2.5 bg-teal-50 border border-teal-100 rounded-xl text-sm text-teal-700 font-medium">
-                        <FiCheck size={14} /> {ct}
+                        <FiCheck size={14} /> {t(`consultTypes.${ct}`)}
                       </div>
                     ))}
                   </div>
@@ -238,18 +238,18 @@ export default function DoctorDetails() {
             {/* Schedule tab */}
             {activeTab === 'schedule' && (
               <div className="bg-white rounded-2xl border border-slate-100 p-6">
-                <h2 className="font-bold text-slate-900 text-lg mb-5" style={{ fontFamily: 'Outfit' }}>Working Hours</h2>
+                <h2 className="font-bold text-slate-900 text-lg mb-5" style={{ fontFamily: 'Outfit' }}>{t('tabs.working_hours')}</h2>
                 <div className="space-y-2">
                   {doctor.workingHours.map(wh => (
                     <div key={wh.day} className={`flex justify-between items-center py-3 px-4 rounded-xl text-sm ${wh.hours === 'Closed' ? 'bg-slate-50' : 'bg-teal-50/60 border border-teal-100/60'}`}>
-                      <span className="font-medium text-slate-700 w-24">{wh.day}</span>
-                      <span className={`font-semibold ${wh.hours === 'Closed' ? 'text-slate-400' : 'text-teal-700'}`}>{wh.hours}</span>
+                      <span className="font-medium text-slate-700 w-24">{t('days.' + wh.day.toLocaleLowerCase())}</span>
+                      <span className={`font-semibold ${wh.hours === 'Closed' ? 'text-slate-400' : 'text-teal-700'}`}>{wh.hours === 'Closed' ? t('actions.closed') : wh.hours}</span>
                       {wh.hours !== 'Closed' && <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />}
                     </div>
                   ))}
                 </div>
                 <div className="mt-5 pt-5 border-t border-slate-100">
-                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Available Time Slots</p>
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">{t('tabs.available_slots')}</p>
                   <div className="flex flex-wrap gap-2">
                     {doctor.availableSlots.map(slot => (
                       <span key={slot} className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-700 font-medium">
@@ -269,7 +269,7 @@ export default function DoctorDetails() {
                   <div className="text-center">
                     <p className="text-5xl font-extrabold text-slate-900" style={{ fontFamily: 'Outfit' }}>{avgRating}</p>
                     <StarRating rating={Number(avgRating)} showCount={false} size={14} />
-                    <p className="text-xs text-slate-500 mt-1">{doctor.comments.length} reviews</p>
+                    <p className="text-xs text-slate-500 mt-1">{doctor.comments.length} </p>
                   </div>
                   <div className="flex-1 space-y-2">
                     {[5,4,3,2,1].map(star => {
@@ -323,7 +323,7 @@ export default function DoctorDetails() {
                   <p className="text-xs text-slate-400">Consultation fee</p>
                   <p className="text-3xl font-extrabold text-slate-900 leading-none mt-1" style={{ fontFamily: 'Outfit' }}>
                     {doctor.consultationFee}
-                    <span className="text-base font-normal text-slate-500 ml-1">MAD</span>
+                    <span className="text-base m-2 font-normal text-slate-500 ml-1">{t('price')}</span>
                   </p>
                 </div>
                 <div className="text-right">
@@ -340,7 +340,7 @@ export default function DoctorDetails() {
 
             {/* Doctor info chips */}
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 space-y-3">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Quick Info</p>
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">{t('quick_info')}</p>
               <div className="flex items-center gap-2 text-sm text-slate-600">
                 <RiUserHeartLine size={15} className="text-teal-600 shrink-0" />
                 <span>{doctor.reviewCount} patients treated</span>

@@ -3,40 +3,40 @@ import { FiTarget, FiHeart, FiShield, FiUsers } from 'react-icons/fi';
 import { RiHeartPulseLine } from 'react-icons/ri';
 import SectionHeader from '../../components/common/SectionHeader';
 
-const values = [
-  { icon: FiTarget, title: 'Our Mission', desc: 'To make quality healthcare accessible to every Moroccan by connecting patients with trusted medical providers seamlessly.' },
-  { icon: FiHeart, title: 'Patient First', desc: 'Every decision we make is centered around improving the patient experience — from search to booking to care.' },
-  { icon: FiShield, title: 'Trust & Safety', desc: 'All doctors and clinics on DocsAura are verified. We protect your data with industry-leading security practices.' },
-  { icon: FiUsers, title: 'Community', desc: 'We believe in building a healthier Morocco together — patients, doctors, and healthcare systems united.' },
-];
-
-const team = [
-  { name: 'Mehdi El Khatib', role: 'CEO & Co-founder', avatar: 'https://randomuser.me/api/portraits/men/32.jpg' },
-  { name: 'Sara Bennani', role: 'CTO & Co-founder', avatar: 'https://randomuser.me/api/portraits/women/25.jpg' },
-  { name: 'Amine Tazi', role: 'Head of Product', avatar: 'https://randomuser.me/api/portraits/men/43.jpg' },
-  { name: 'Nadia Chraibi', role: 'Head of Partnerships', avatar: 'https://randomuser.me/api/portraits/women/38.jpg' },
-];
-
-const milestones = [
-  { year: '2020', event: 'DocsAura founded in Rabat with a vision to digitize healthcare in Morocco.' },
-  { year: '2021', event: 'Launched beta with 20 doctors. 1,000 bookings in the first 3 months.' },
-  { year: '2022', event: 'Expanded to Casablanca and Fès. Reached 5,000 registered patients.' },
-  { year: '2023', event: 'Integrated lab booking and AI assistant. Raised Seed funding.' },
-  { year: '2024', event: '50,000+ patients, 120+ doctors, and partnerships with major Moroccan insurers.' },
-  { year: '2025', event: 'Launched multilingual platform (AR/FR/EN) with RTL support.' },
-];
-
 export default function About() {
+  const { t } = useTranslation();
+  const values = [
+    { icon: FiTarget, title: 'our_mission', desc: 'our_mission_desc' },
+    { icon: FiHeart, title: 'patient_first', desc: 'patient_first_desc' },
+    { icon: FiShield, title: 'trust_and_safety', desc: 'trust_and_safety_desc' },
+    { icon: FiUsers, title: 'community', desc: 'community_desc' },
+  ];
+
+  const team = [
+    { name: 'ceo_name', role: 'ceo_role', avatar: 'https://randomuser.me/api/portraits/men/32.jpg' },
+    { name: 'cto_name', role: 'cto_role', avatar: 'https://randomuser.me/api/portraits/women/25.jpg' },
+    { name: 'head_of_product_name', role: 'head_of_product_role', avatar: 'https://randomuser.me/api/portraits/men/43.jpg' },
+    { name: 'head_of_partnerships_name', role: 'head_of_partnerships_role', avatar: 'https://randomuser.me/api/portraits/women/38.jpg' },
+  ];
+
+  const milestones = [
+    { year: '2020', event: 'milestone_1_title' },
+    { year: '2021', event: 'milestone_2_title' },
+    { year: '2022', event: 'milestone_3_title' },
+    { year: '2023', event: 'milestone_4_title' },
+    { year: '2024', event: 'milestone_5_title' },
+    { year: '2025', event: 'milestone_6_title' },
+  ];
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Hero */}
       <section className="bg-teal-900 py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-5" style={{ fontFamily: 'Outfit, sans-serif' }}>
-            About DocsAura
+            {t('about.title')}
           </h1>
           <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            We're on a mission to make healthcare simple, transparent, and accessible for every Moroccan. DocsAura connects patients with verified doctors, clinics, and laboratories — all in one platform.
+            {t('about.subtitle')}          
           </p>
         </div>
       </section>
@@ -44,15 +44,15 @@ export default function About() {
       {/* Values */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <SectionHeader eyebrow="What drives us" title="Our Core Values" />
+          <SectionHeader eyebrow={t('about.values.eyebrow')} title={t('about.values.title')} />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((v, i) => (
               <div key={i} className="p-6 bg-slate-50 border border-slate-100 rounded-2xl">
                 <div className="w-11 h-11 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center mb-4">
                   <v.icon size={20} className="text-teal-700" />
                 </div>
-                <h3 className="font-bold text-slate-900 text-base mb-2" style={{ fontFamily: 'Outfit, sans-serif' }}>{v.title}</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">{v.desc}</p>
+                <h3 className="font-bold text-slate-900 text-base mb-2" style={{ fontFamily: 'Outfit, sans-serif' }}>{t(`about.values.${v.title}`)}</h3>
+                <p className="text-sm text-slate-500 leading-relaxed">{t(`about.values.${v.desc}`)}</p>
               </div>
             ))}
           </div>
@@ -63,14 +63,14 @@ export default function About() {
       <section className="py-16 bg-teal-700">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
-            { value: '120+', label: 'Verified Doctors' },
-            { value: '45+', label: 'Partner Clinics' },
-            { value: '50k+', label: 'Patients Served' },
-            { value: '5★', label: 'Average Rating' },
+            { value: '120+', label: 'verified_doctors' },
+            { value: '45+', label: 'partner_clinics' },
+            { value: '50k+', label: 'patients_served' },
+            { value: '5★', label: 'average_rating' },
           ].map((s, i) => (
             <div key={i}>
               <p className="text-4xl font-extrabold text-white mb-1" style={{ fontFamily: 'Outfit, sans-serif' }}>{s.value}</p>
-              <p className="text-teal-200 text-sm">{s.label}</p>
+              <p className="text-teal-200 text-sm">{t(`about.stats.${s.label}`)}</p>
             </div>
           ))}
         </div>
@@ -79,7 +79,7 @@ export default function About() {
       {/* Timeline */}
       <section className="py-20 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <SectionHeader eyebrow="Our Journey" title="How We Got Here" />
+          <SectionHeader eyebrow={t('about.milestones.eyebrow')} title={t('about.milestones.title')} />
           <div className="relative">
             <div className="absolute left-8 top-0 bottom-0 w-px bg-slate-200" />
             <div className="space-y-8">
@@ -91,7 +91,7 @@ export default function About() {
                     </div>
                   </div>
                   <div className="bg-slate-50 border border-slate-100 rounded-xl px-5 py-4 flex-1">
-                    <p className="text-sm text-slate-600">{m.event}</p>
+                    <p className="text-sm text-slate-600">{t(`about.milestones.${m.event}`)}</p>
                   </div>
                 </div>
               ))}
@@ -103,13 +103,13 @@ export default function About() {
       {/* Team */}
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <SectionHeader eyebrow="The People" title="Meet Our Team" subtitle="Built by Moroccans, for Moroccans." />
+          <SectionHeader eyebrow={t('about.team.eyebrow')} title={t('about.team.title')} subtitle={t('about.team.subtitle')} />
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             {team.map((member, i) => (
               <div key={i} className="bg-white border border-slate-100 rounded-2xl p-6 text-center card-hover">
                 <img src={member.avatar} alt={member.name} className="w-16 h-16 rounded-full object-cover mx-auto mb-4" />
-                <p className="font-semibold text-slate-900 text-sm">{member.name}</p>
-                <p className="text-xs text-teal-600 mt-1">{member.role}</p>
+                <p className="font-semibold text-slate-900 text-sm">{t(`about.team.${member.name}`)}</p>
+                <p className="text-xs text-teal-600 mt-1">{t(`about.team.${member.role}`)}</p>
               </div>
             ))}
           </div>

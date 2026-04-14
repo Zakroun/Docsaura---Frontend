@@ -14,18 +14,18 @@ import { laboratories } from '../../data/laboratories';
 import SectionHeader from '../../components/common/SectionHeader';
 
 const tips = [
-  "Stay hydrated — aim for 8 glasses of water per day.",
-  "Regular checkups help catch issues early. Book your annual visit!",
-  "30 minutes of moderate exercise daily can transform your health.",
-  "Sleep 7–9 hours per night for optimal mental and physical health.",
-  "Reduce processed food intake and choose whole foods when possible.",
+  "tipe1",
+  "tipe2",
+  "tipe3",
+  "tipe4",
+  "tipe5",
 ];
 
 const quickLinks = [
-  { to: '/doctors', label: 'Find a Doctor', icon: RiStethoscopeLine, color: 'bg-teal-50 border-teal-200 text-teal-700' },
-  { to: '/clinics', label: 'Clinics Near Me', icon: FiActivity, color: 'bg-blue-50 border-blue-200 text-blue-700' },
-  { to: '/labs', label: 'Book a Lab Test', icon: FiCheckCircle, color: 'bg-violet-50 border-violet-200 text-violet-700' },
-  { to: '/contact', label: 'Get Support', icon: FiUser, color: 'bg-amber-50 border-amber-200 text-amber-700' },
+  { to: '/doctors', label: 'link1', icon: RiStethoscopeLine, color: 'bg-teal-50 border-teal-200 text-teal-700' },
+  { to: '/clinics', label: 'link2', icon: FiActivity, color: 'bg-blue-50 border-blue-200 text-blue-700' },
+  { to: '/labs', label: 'link3', icon: FiCheckCircle, color: 'bg-violet-50 border-violet-200 text-violet-700' },
+  { to: '/contact', label: 'link4', icon: FiUser, color: 'bg-amber-50 border-amber-200 text-amber-700' },
 ];
 
 export default function Dashboard() {
@@ -50,7 +50,7 @@ export default function Dashboard() {
               <FiUser size={24} className="text-white" />
             </div>
             <div>
-              <p className="text-teal-200 text-sm">Good day,</p>
+              <p className="text-teal-200 text-sm">{t('Dashboard.hello')},</p>
               <h1 className="text-2xl font-extrabold text-white" style={{ fontFamily: 'Outfit, sans-serif' }}>
                 {user?.name || 'Patient'}
               </h1>
@@ -61,14 +61,14 @@ export default function Dashboard() {
           {/* Stats row */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
             {[
-              { label: 'Total Bookings', value: bookings.length || 0, icon: FiCalendar },
-              { label: 'Upcoming', value: upcoming.length || 0, icon: RiCalendarCheckLine },
-              { label: 'Completed', value: past.length || 0, icon: FiCheckCircle },
-              { label: 'Saved Doctors', value: 0, icon: FiHeart },
+              { label: 'total_bookings', value: bookings.length || 0, icon: FiCalendar },
+              { label: 'upcoming_bookings', value: upcoming.length || 0, icon: RiCalendarCheckLine },
+              { label: 'completed_bookings', value: past.length || 0, icon: FiCheckCircle },
+              { label: 'saved_bookings', value: 0, icon: FiHeart },
             ].map((s, i) => (
               <div key={i} className="bg-white/10 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-teal-200 text-xs">{s.label}</p>
+                  <p className="text-teal-200 text-xs">{t('Dashboard.stats.' + s.label)}</p>
                   <s.icon size={15} className="text-teal-300" />
                 </div>
                 <p className="text-3xl font-extrabold text-white" style={{ fontFamily: 'Outfit' }}>{s.value}</p>
@@ -81,19 +81,18 @@ export default function Dashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
-
             {/* Upcoming appointments */}
             <div>
-              <SectionHeader title="Upcoming Appointments" eyebrow="Your Schedule" />
+              <SectionHeader title={t('Dashboard.upcoming_title')} eyebrow={t('Dashboard.upcoming_eyebrow')} />
               {upcoming.length === 0 ? (
                 <div className="bg-white border border-slate-100 rounded-2xl p-10 text-center">
                   <div className="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-4">
                     <FiCalendar size={24} className="text-slate-400" />
                   </div>
-                  <h3 className="font-semibold text-slate-900 mb-2">No upcoming appointments</h3>
-                  <p className="text-sm text-slate-500 mb-5">Book your first appointment with a doctor or lab today.</p>
+                  <h3 className="font-semibold text-slate-900 mb-2">{t('Dashboard.no_upcoming_title')}</h3>
+                  <p className="text-sm text-slate-500 mb-5">{t('Dashboard.no_upcoming_desc')}</p>
                   <Link to="/doctors" className="inline-flex items-center gap-2 px-5 py-2.5 bg-teal-700 text-white font-semibold rounded-xl text-sm hover:bg-teal-800 transition-colors">
-                    Find a Doctor <FiArrowRight size={14} />
+                    {t('Dashboard.find_doctor')} <FiArrowRight size={14} />
                   </Link>
                 </div>
               ) : (
@@ -111,7 +110,7 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <span className="px-3 py-1 bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-semibold rounded-full">
-                        Confirmed
+                        {t('Dashboard.confirmed')}
                       </span>
                     </div>
                   ))}
@@ -135,7 +134,7 @@ export default function Dashboard() {
                           <span>{b.date}</span><span>{b.time}</span>
                         </div>
                       </div>
-                      <span className="px-3 py-1 bg-slate-100 text-slate-500 text-xs font-semibold rounded-full">Completed</span>
+                      <span className="px-3 py-1 bg-slate-100 text-slate-500 text-xs font-semibold rounded-full">{t('Dashboard.completed')}</span>
                     </div>
                   ))}
                 </div>
@@ -144,7 +143,7 @@ export default function Dashboard() {
 
             {/* Suggested doctors */}
             <div>
-              <SectionHeader title="Recommended For You" eyebrow="Suggestions" linkTo="/doctors" linkLabel="View all" />
+              <SectionHeader title={t('Dashboard.suggested_title')} eyebrow={t('Dashboard.suggested_eyebrow')} linkTo="/doctors" linkLabel={t('Dashboard.suggested_linkLabel')} />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {doctors.slice(0, 2).map(doc => (
                   <Link key={doc.id} to={`/doctors/${doc.id}`}
@@ -154,7 +153,7 @@ export default function Dashboard() {
                     <div className="flex-1 min-w-0">
                       <p className="font-semibold text-slate-900 text-sm truncate">{doc.name}</p>
                       <p className="text-xs text-slate-500">{doc.specialty}</p>
-                      <p className="text-xs text-teal-600 font-semibold mt-1">⭐ {doc.rating} · {doc.consultationFee} MAD</p>
+                      <p className="text-xs text-teal-600 font-semibold mt-1">⭐ {doc.rating} · {doc.consultationFee} {t('price')}</p>
                     </div>
                     <FiArrowRight size={15} className="text-slate-400 shrink-0" />
                   </Link>
@@ -169,21 +168,21 @@ export default function Dashboard() {
             <div className="bg-gradient-to-br from-teal-50 to-cyan-50 border border-teal-100 rounded-2xl p-5">
               <div className="flex items-center gap-2 mb-3">
                 <FiHeart size={15} className="text-teal-600" />
-                <p className="text-xs font-semibold text-teal-700 uppercase tracking-wide">Daily Health Tip</p>
+                <p className="text-xs font-semibold text-teal-700 uppercase tracking-wide">{t('Dashboard.health_tip')}</p>
               </div>
-              <p className="text-slate-700 text-sm leading-relaxed">{tip}</p>
+              <p className="text-slate-700 text-sm leading-relaxed">{t('Dashboard.tips.' + tip)}</p>
             </div>
 
             {/* Quick links */}
             <div>
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Quick Actions</p>
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">{t('Dashboard.quick_actions.title')}</p>
               <div className="space-y-2">
                 {quickLinks.map((link, i) => (
                   <Link key={i} to={link.to}
                     className={`flex items-center gap-3 p-3.5 rounded-xl border card-hover ${link.color}`}
                   >
                     <link.icon size={16} className="shrink-0" />
-                    <span className="text-sm font-medium flex-1">{link.label}</span>
+                    <span className="text-sm font-medium flex-1">{t('Dashboard.quick_actions.links.' + link.label)}</span>
                     <FiArrowRight size={14} className="opacity-50" />
                   </Link>
                 ))}
@@ -192,18 +191,18 @@ export default function Dashboard() {
 
             {/* Account info */}
             <div className="bg-white border border-slate-100 rounded-2xl p-5">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-4">Account</p>
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-4">{t('Dashboard.account_info.account')}</p>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Name</span>
+                  <span className="text-slate-500">{t('Dashboard.account_info.name')}</span>
                   <span className="font-medium text-slate-900">{user?.name}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Email</span>
+                  <span className="text-slate-500">{t('Dashboard.account_info.email')}</span>
                   <span className="font-medium text-slate-900 truncate max-w-[140px]">{user?.email}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Member since</span>
+                  <span className="text-slate-500">{t('Dashboard.account_info.member_since')}</span>
                   <span className="font-medium text-slate-900">2025</span>
                 </div>
               </div>

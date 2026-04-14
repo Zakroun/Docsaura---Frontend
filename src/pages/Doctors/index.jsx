@@ -8,8 +8,6 @@ import { useSearch } from '../../hooks/useSearch';
 import { SkeletonCard } from '../../components/common/Skeleton';
 import { MdOutlineSearchOff } from "react-icons/md";
 
-const SPECIALTIES = ['All', 'Cardiology', 'Orthopedics', 'Pediatrics', 'Dermatology', 'Neurology'];
-
 export default function Doctors() {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
@@ -29,15 +27,15 @@ export default function Doctors() {
       <div className="bg-white border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
           <SectionHeader
-            eyebrow="Browse & Book"
-            title={t('nav.doctors')}
-            subtitle="Find the right specialist for your needs. All doctors are verified and trusted."
+            eyebrow={t('doctors.eyebrow')}
+            title={t('doctors.title')}
+            subtitle={t('doctors.subtitle')}
           />
           <SearchBar
             value={query}
             onChange={handleQuery}
-            placeholder="Search by name, specialty, or location..."
-            filters={SPECIALTIES}
+            placeholder={t('doctors.input_placeholder')}
+            filters={t('doctors.types', { returnObjects: true })}
             activeFilter={activeFilter}
             onFilter={handleFilter}
           />
@@ -50,13 +48,13 @@ export default function Doctors() {
             <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-5">
               <MdOutlineSearchOff size={28} className="text-slate-500" />
             </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-2">No doctors found</h3>
-            <p className="text-slate-500 text-sm">Try adjusting your search or clearing filters</p>
+            <h3 className="text-xl font-bold text-slate-900 mb-2">{t('doctors.notfound_title')}</h3>
+            <p className="text-slate-500 text-sm">{t('doctors.notfound_desc')}</p>
           </div>
         ) : (
           <>
             <p className="text-sm text-slate-500 mb-6 font-medium">
-              {filtered.length} doctor{filtered.length !== 1 ? 's' : ''} found
+              {filtered.length} {filtered.length !== 1 ? t('doctors.doctors') : t('doctors.doctor') } {t('found_search')}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((doc, i) => (

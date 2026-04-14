@@ -38,7 +38,7 @@ export default function Register() {
     setLoading(true);
     await new Promise(r => setTimeout(r, 1200));
     login({ id: 1, name: form.name, email: form.email });
-    addToast('Account created! Welcome to DocsAura.', 'success');
+    addToast(t('auth.register_success'), 'success');
     setLoading(false);
     navigate('/');
   };
@@ -50,17 +50,17 @@ export default function Register() {
   const strengthColors = ['', 'bg-red-400', 'bg-amber-400', 'bg-emerald-500'];
 
   return (
-    <AuthLayout title={t('auth.register_title')} subtitle="Join thousands of patients on DocsAura">
+    <AuthLayout title={t('auth.register_title')} subtitle={t('auth.register_subtitle')}>
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <Input
           label={t('auth.name')} name="name"
           value={form.name} onChange={handleChange} error={errors.name}
-          placeholder="Aicha Bennani" required icon={FiUser}
+          placeholder={t('auth.name_placeholder')} required icon={FiUser}
         />
         <Input
           label={t('auth.email')} name="email" type="email"
           value={form.email} onChange={handleChange} error={errors.email}
-          placeholder="your@email.com" required icon={FiMail}
+          placeholder={t('auth.email_placeholder')} required icon={FiMail}
         />
         <div>
           <div className="relative">
@@ -68,7 +68,7 @@ export default function Register() {
               label={t('auth.password')} name="password"
               type={showPass ? 'text' : 'password'}
               value={form.password} onChange={handleChange} error={errors.password}
-              placeholder="Min. 8 characters" required icon={FiLock}
+              placeholder={t('auth.password_placeholder')} required icon={FiLock}
             />
             <button type="button" onClick={() => setShowPass(p => !p)}
               className="absolute right-3 top-8 text-slate-400 hover:text-slate-600"
@@ -92,17 +92,17 @@ export default function Register() {
             label={t('auth.confirm_password')} name="confirm"
             type={showPass ? 'text' : 'password'}
             value={form.confirm} onChange={handleChange} error={errors.confirm}
-            placeholder="Repeat your password" required icon={FiLock}
+            placeholder={t('auth.confirm_password_placeholder')} required icon={FiLock}
           />
         </div>
 
         <div className="flex items-start gap-2 pt-1">
           <input type="checkbox" required id="terms" className="mt-0.5 rounded border-slate-300 text-teal-600" />
           <label htmlFor="terms" className="text-xs text-slate-500 cursor-pointer">
-            I agree to the{' '}
-            <a href="#" className="text-teal-700 font-medium hover:underline">Terms of Service</a>{' '}
-            and{' '}
-            <a href="#" className="text-teal-700 font-medium hover:underline">Privacy Policy</a>
+            {t('auth.register_agree')}{' '}
+            <a href="#" className="text-teal-700 font-medium hover:underline">{t('auth.register_terms')}</a>{' '}
+            {t('auth.register_and')}{' '}
+            <a href="#" className="text-teal-700 font-medium hover:underline">{t('auth.register_privacy')}</a>
           </label>
         </div>
 

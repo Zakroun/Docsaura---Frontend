@@ -22,7 +22,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm leading-relaxed mb-5">
-              Morocco's leading healthcare platform connecting patients with the best doctors, clinics, and labs.
+              {t('footer.description')}
             </p>
             <div className="flex gap-3">
               {[FaFacebook, FaTwitter, FaInstagram, FaLinkedin].map((Icon, i) => (
@@ -55,8 +55,8 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold text-sm mb-4">Services</h4>
             <ul className="space-y-2.5 text-sm">
-              {['Online Booking', 'Video Consultations', 'Lab Tests', 'Emergency Care', 'Home Visits', 'Health Packages'].map(s => (
-                <li key={s}><span className="hover:text-teal-400 transition-colors cursor-default">{s}</span></li>
+              {['online_booking', 'video_consultation', 'lab_tests', 'emergency_care', 'home_visit', 'health_package'].map(s => (
+                <li key={s}><span className="hover:text-teal-400 transition-colors cursor-default">{t('footer.services.' + s )}</span></li>
               ))}
             </ul>
           </div>
@@ -67,7 +67,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2.5">
                 <FiMapPin size={15} className="mt-0.5 shrink-0 text-teal-500" />
-                <span>123 Avenue Mohammed V, Rabat, Morocco</span>
+                <span>{t('footer.address')}</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <FiPhone size={15} className="shrink-0 text-teal-500" />
@@ -82,11 +82,11 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-          <p>© 2025 DocsAura. All rights reserved.</p>
+          <p>© 2025 DocsAura. {t('footer.all_rights')}</p>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-teal-400 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-teal-400 transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-teal-400 transition-colors">Cookie Policy</a>
+            <a href="#" className="hover:text-teal-400 transition-colors">{t('footer.privacy_policy')}</a>
+            <a href="#" className="hover:text-teal-400 transition-colors">{t('footer.terms_of_service')}</a>
+            <a href="#" className="hover:text-teal-400 transition-colors">{t('footer.cookie_policy')}</a>
           </div>
         </div>
       </div>
