@@ -16,15 +16,17 @@ export default function ChatWidget() {
   const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const [minimized, setMinimized] = useState(false);
-  const [messages, setMessages] = useState([
-    { role: 'assistant', content: t('chat.greeting') }
-  ]);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
-
+  useEffect(() => {
+    setMessages([
+      { role: 'assistant', content: t('chat.greeting') }
+    ]);
+  }, [i18n.language, t]);
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, loading]);
@@ -69,9 +71,9 @@ export default function ChatWidget() {
       }
 
       const data = await response.json();
-      
+
       let reply = t('chat.fallbackError');
-      
+
       if (data.success && data.data) {
         reply = data.data;
       } else if (data.error) {
@@ -113,9 +115,8 @@ export default function ChatWidget() {
 
       {open && (
         <div
-          className={`fixed bottom-6 right-5 z-50 w-[360px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col animate-chat-appear overflow-hidden transition-all duration-200 ${
-            minimized ? 'h-16' : 'h-[520px]'
-          }`}
+          className={`fixed bottom-6 right-5 z-50 w-[360px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col animate-chat-appear overflow-hidden transition-all duration-200 ${minimized ? 'h-16' : 'h-[520px]'
+            }`}
         >
           <div className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-teal-700 to-teal-600 shrink-0">
             <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center shrink-0">
@@ -150,9 +151,8 @@ export default function ChatWidget() {
                 {messages.map((msg, i) => (
                   <div
                     key={i}
-                    className={`flex gap-2 ${
-                      msg.role === 'user' ? 'justify-end' : 'justify-start'
-                    }`}
+                    className={`flex gap-2 ${msg.role === 'user' ? 'justify-end' : 'justify-start'
+                      }`}
                   >
                     {msg.role === 'assistant' && (
                       <div className="w-7 h-7 rounded-full bg-teal-50 border border-teal-100 flex items-center justify-center shrink-0 mt-0.5">
@@ -160,9 +160,8 @@ export default function ChatWidget() {
                       </div>
                     )}
                     <div
-                      className={`max-w-[78%] px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
-                        msg.role === 'user' ? 'chat-bubble-user' : 'chat-bubble-ai'
-                      }`}
+                      className={`max-w-[78%] px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${msg.role === 'user' ? 'chat-bubble-user' : 'chat-bubble-ai'
+                        }`}
                     >
                       {msg.content}
                     </div>

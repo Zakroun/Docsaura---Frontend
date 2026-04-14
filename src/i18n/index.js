@@ -310,6 +310,7 @@ const resources = {
       },
       chat: {
         title: "DocsAura AI", subtitle: "Ask me anything about health",
+        online: "Online", offline: "Offline", typing: "Typing...",
         placeholder: "Ask a health question...", greeting: "Hello! I'm your DocsAura AI assistant. How can I help you today?",
         suggestions: ["What are symptoms of diabetes?", "How to find a cardiologist?", "What tests do I need for annual checkup?"],
         fallbackError: "Sorry, I'm having trouble answering that right now. Please try again later.",
@@ -793,6 +794,7 @@ const resources = {
       },
       chat: {
         title: "DocsAura IA", subtitle: "Posez-moi des questions de santé",
+        online: "En ligne", offline: "Hors ligne", typing: "En train de taper...",
         placeholder: "Posez une question de santé...", greeting: "Bonjour! Je suis votre assistant IA DocsAura. Comment puis-je vous aider?",
         suggestions: ["Quels sont les symptômes du diabète?", "Comment trouver un cardiologue?", "Quels tests pour un bilan annuel?"],
         fallbackError: "Désolé, j'ai du mal à répondre en ce moment. Veuillez réessayer plus tard.",
@@ -1262,8 +1264,10 @@ const resources = {
         search: "بحث", filter: "تصفية", all: "الكل", read_more: "اقرأ المزيد",
         send: "إرسال", close: "إغلاق"
       },
+      
       chat: {
         title: "مساعد DocsAura", subtitle: "اسألني أي سؤال صحي",
+        online: "متصل", offline: "غير متصل",
         placeholder: "اطرح سؤالاً صحياً...", greeting: "مرحباً! أنا مساعدك الذكي من DocsAura. كيف يمكنني مساعدتك اليوم؟",
         suggestions: ["ما هي أعراض مرض السكري؟", "كيف أجد طبيب قلب؟", "ما الفحوصات اللازمة للفحص السنوي؟"],
         fallbackError: "عذراً، أواجه مشكلة في الإجابة الآن. يرجى المحاولة مرة أخرى لاحقاً.",
