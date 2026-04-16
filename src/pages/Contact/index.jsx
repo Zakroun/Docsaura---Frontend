@@ -6,6 +6,8 @@ import Input, { Textarea, Select } from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
 import { sanitize } from '../../utils';
 
+const Apiurl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 const contactInfo = [
   { icon: FiMapPin, label: 'Address', value: '123 Avenue Mohammed V, Rabat 10000, Morocco' },
   { icon: FiPhone, label: 'Phone', value: '+212 537 00 11 22', href: 'tel:+212537001122' },
@@ -14,7 +16,7 @@ const contactInfo = [
 ];
 
 export default function Contact() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -28,16 +30,47 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const errs = {};
     if (!form.name.trim()) errs.name = 'Required.';
     if (!form.email.trim()) errs.email = 'Required.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = 'Invalid email.';
     if (!form.message.trim()) errs.message = 'Required.';
-    if (Object.keys(errs).length) { setErrors(errs); return; }
+
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      return;
+    }
+
     setLoading(true);
-    await new Promise(r => setTimeout(r, 1000));
-    setLoading(false);
-    setSubmitted(true);
+
+    try {
+      const res = await fetch(`${Apiurl}/sendMail`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: sanitize(form.name),
+          email: sanitize(form.email),
+          subject: sanitize(form.subject),
+          message: sanitize(form.message),
+          lang: i18n.language,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.message === "Emails sent successfully") {
+        setSubmitted(true);
+        setForm({ name: '', email: '', subject: '', message: '' });
+      } else {
+        throw new Error(data.error || 'Something went wrong');
+      }
+
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

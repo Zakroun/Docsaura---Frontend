@@ -4,7 +4,7 @@ import { FiSend, FiX, FiMessageSquare, FiMinus } from 'react-icons/fi';
 import { RiHeartPulseLine, RiRobot2Line } from 'react-icons/ri';
 import { sanitize, checkRateLimit } from '../../utils';
 
-const Apiurl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/ai';
+const Apiurl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const SYSTEM_PROMPT = `You are DocsAura Assistant, a helpful and empathetic medical information assistant. 
 Your role is to provide general health information, help users find appropriate doctors, and answer common medical questions.
@@ -52,8 +52,8 @@ export default function ChatWidget() {
       const history = [...messages, userMsg]
         .filter(m => m.role !== 'system')
         .map(m => ({ role: m.role, content: m.content }));
-
-      const response = await fetch(`${Apiurl}`, {
+      const url = new URL(`${Apiurl}/ai`);
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
